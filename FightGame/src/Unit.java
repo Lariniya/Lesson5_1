@@ -27,8 +27,7 @@ public class Unit {
             this.name = name;
         } else {
             this.name = NAME_DEFAULT;
-            System.out.println("Ошибка! Имя не может быть пустым! Присвоено значение по-умолчанию "
-                    + NAME_DEFAULT);
+            System.out.println(FightMessagesUtil.buildDefaultNameMessage(this));
         }
     }
 
@@ -41,8 +40,7 @@ public class Unit {
             this.health = health;
         } else {
             this.health = HEALTH_DEFAULT;
-            System.out.println("Ошибка! Здоровье не может быть равно 0! Присвоено значение по-умолчанию "
-                    + HEALTH_DEFAULT);
+            System.out.println(FightMessagesUtil.buildNullHealthMessage(HEALTH_DEFAULT));
         }
     }
 
@@ -55,8 +53,7 @@ public class Unit {
             this.physicalDamage = physicalDamage;
         } else {
             this.physicalDamage = PHYSICAL_DAMAGE_DEFAULT;
-            System.out.println("Ошибка! Физическая атака не может быть равна 0! Присвоено значение по-умолчанию "
-                    + PHYSICAL_DAMAGE_DEFAULT);
+            System.out.println(FightMessagesUtil.buildNullPhysicalAttackMessage(PHYSICAL_DAMAGE_DEFAULT));
         }
     }
 
@@ -64,13 +61,12 @@ public class Unit {
         return magicDamage;
     }
 
-    public void setMagicDamage(int magic_damage) {
-        if (magic_damage > 0) {
-            this.magicDamage = magic_damage;
+    public void setMagicDamage(int magicDamage) {
+        if (magicDamage > 0) {
+            this.magicDamage = magicDamage;
         } else {
             this.magicDamage = MAGIC_DAMAGE_DEFAULT;
-            System.out.println("Ошибка! Магическая атака не может быть равна 0! Присвоено значение по-умолчанию "
-                    + MAGIC_DAMAGE_DEFAULT);
+            System.out.println(FightMessagesUtil.buildMNullMagicMessage(MAGIC_DAMAGE_DEFAULT));
         }
     }
 
@@ -84,11 +80,6 @@ public class Unit {
 
     @Override
     public String toString() {
-        return "Поздравляем! Вы создали персонажа " +
-                " по имени " + name +
-                ", со здоровьем " + health +
-                ", его физический урон " + physicalDamage +
-                ", а его магическая атака " + magicDamage +
-                ". Приятной игры!";
+        return FightMessagesUtil.buildCreateUnitMessage(name, health, physicalDamage, magicDamage);
     }
 }

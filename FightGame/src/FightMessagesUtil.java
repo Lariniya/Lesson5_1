@@ -11,17 +11,19 @@ public class FightMessagesUtil {
             "Ошибка! Магическая атака не может быть равна 0! Присвоено значение по-умолчанию %s";
     public static final String CREATE_UNIT_MESSAGE = "Поздравляем! Вы создали персонажа" +
             " по имени %s, со здоровьем %s, его физический урон %s, а его магическая атака %s";
+    public static final String CREATE_RANDOM_UNIT_MESSAGE = "Поздравляем! Мы создали для вас персонажа" + //пока вы валялись на диване
+            " по имени %s, со здоровьем %s, его физический урон %s, а его магическая атака %s";
 
     public static String buildDefaultNameMessage(Unit unit) {
         return String.format(DEFAULT_NAME_MESSAGE, unit.getName());
     }
 
     public static String buildPhysicalDamageMessage(Unit unitAttacker, int physicalDamage, Unit unitTarget) {
-        return String.format(PHYSICAL_DAMAGE_MESSAGE, unitAttacker.getName(), physicalDamage, unitTarget);
+        return String.format(PHYSICAL_DAMAGE_MESSAGE, unitAttacker.getName(), physicalDamage, unitTarget.getName());
     }
 
     public static String buildMagicDamageMessage(Unit unitAttacker, int magicDamage, Unit unitTarget) {
-        return String.format(MAGIC_DAMAGE_MESSAGE, unitAttacker.getName(), magicDamage, unitTarget);
+        return String.format(MAGIC_DAMAGE_MESSAGE, unitAttacker.getName(), magicDamage, unitTarget.getName());
     }
 
     public static String buildNullHealthMessage(int healthDefault) {
@@ -38,5 +40,9 @@ public class FightMessagesUtil {
 
     public static String buildCreateUnitMessage(String name, int health, int physicalDamage, int magicDamage) {
         return String.format(CREATE_UNIT_MESSAGE, name, health, physicalDamage, magicDamage);
+    }
+
+    public static String buildCreateRandomUnitMessage(String name, int health, int physicalDamage, int magicDamage) {
+        return String.format(CREATE_RANDOM_UNIT_MESSAGE, name, health, physicalDamage, magicDamage);
     }
 }

@@ -78,8 +78,8 @@ public class Unit {
         this.health -= magicDamage;
     }
 
-    @Override
-    public String toString() {
-        return FightMessagesUtil.buildCreateUnitMessage(name, health, physicalDamage, magicDamage);
-    }
+   // @Override
+   // public String toString() {
+      //  return FightMessagesUtil.buildCreateUnitMessage(name, health, physicalDamage, magicDamage);
+   // }
 }

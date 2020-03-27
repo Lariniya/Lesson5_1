@@ -1,8 +1,8 @@
 public class FightMessagesUtil {
 
     public static final String DEFAULT_NAME_MESSAGE = "Ошибка! Имя не может быть пустым! Присвоено значение по-умолчанию %s";
-    public static final String PHYSICAL_DAMAGE_MESSAGE = "%s нанес %s физического урона %s";
-    public static final String MAGIC_DAMAGE_MESSAGE = "%s нанес %s физического урона %s";
+    public static final String PHYSICAL_DAMAGE_MESSAGE = "%s нанес %s физического урона %s, осталось %s здоровья";
+    public static final String MAGIC_DAMAGE_MESSAGE = "%s нанес %s магического урона %s, осталось %s здоровья";
     public static final String NULL_HEALTH_ERROR_MESSAGE =
             "Ошибка! Здоровье не может быть равно 0! Присвоено значение по-умолчанию %s";
     public static final String NULL_PHYSICAL_ATTACK_ERROR_MESSAGE =
@@ -19,11 +19,11 @@ public class FightMessagesUtil {
     }
 
     public static String buildPhysicalDamageMessage(Unit unitAttacker, int physicalDamage, Unit unitTarget) {
-        return String.format(PHYSICAL_DAMAGE_MESSAGE, unitAttacker.getName(), physicalDamage, unitTarget.getName());
+        return String.format(PHYSICAL_DAMAGE_MESSAGE, unitAttacker.getName(), physicalDamage, unitTarget.getName(), unitTarget.getHealth());
     }
 
     public static String buildMagicDamageMessage(Unit unitAttacker, int magicDamage, Unit unitTarget) {
-        return String.format(MAGIC_DAMAGE_MESSAGE, unitAttacker.getName(), magicDamage, unitTarget.getName());
+        return String.format(MAGIC_DAMAGE_MESSAGE, unitAttacker.getName(), magicDamage, unitTarget.getName(), unitTarget.getHealth());
     }
 
     public static String buildNullHealthMessage(int healthDefault) {

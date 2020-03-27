@@ -6,7 +6,8 @@ public class Interface {
     private static final int MAX_HEALTH_RAND = 100;
     private static final int MAX_PHYSICAL_ATTACK_RAND = 50;
     private static final int MAX_MAGIC_ATTACK_RAND = 70;
-    private static final String[] ARRAY_NAMES_RAND = {"Крейг","Макс","Сара","Энди","Тамара", "Зинаида", "Паркинсон"};
+    private static final String[] ARRAY_NAMES_RAND =
+            {"Крейг", "Макс", "Сара", "Энди", "Тамара", "Зинаида", "Паркинсон"};
 
 
     public void readConsole() {
@@ -24,6 +25,17 @@ public class Interface {
             System.out.println("Извините, но это явно не число. Перезапустите программу и попробуйте снова!");
         }
         sc.close();
+    }
+
+    public int readInt(Scanner sc, String message){
+        System.out.println(message);
+        if (sc.hasNextInt()){
+            return sc.nextInt();
+        }
+        else {
+            System.out.println("Ошибка. Не смогли распознать число " + sc.nextLine());
+            return readInt(sc, message);
+        }
     }
 
     public void chooseGameType(int number) {
@@ -56,45 +68,41 @@ public class Interface {
             fightService.fight(unit1, unit2);
         }
         if (number == 2) {
-                Scanner scannerForCreatingUnits = new Scanner(System.in);
-                System.out.println("Введите имя первого персонажа");
-                String nameUnit1 = scannerForCreatingUnits.nextLine();
-                System.out.println("Введите уровень здоровья первого персонажа");
-                int healthUnit1 = scannerForCreatingUnits.nextInt();
-                System.out.println("Введите физическую атаку первого персонажа");
-                int physicalDamageUnit1 = scannerForCreatingUnits.nextInt();
-                System.out.println("Введите магическую атаку первого персонажа");
-                int magicDamageUnit1 = scannerForCreatingUnits.nextInt();
+            Scanner scannerForCreatingUnits = new Scanner(System.in);
+            System.out.println("Введите имя первого персонажа");
+            String nameUnit1 = scannerForCreatingUnits.nextLine();
+            int healthUnit1 = readInt(scannerForCreatingUnits, "Введите уровень здоровья первого персонажа");
+            int physicalDamageUnit1 = readInt(scannerForCreatingUnits, "Введите физическую атаку первого персонажа");
+            int magicDamageUnit1 = readInt(scannerForCreatingUnits, "Введите магическую атаку первого персонажа");
 
-                Unit unit1 = new Unit(nameUnit1, healthUnit1, physicalDamageUnit1, magicDamageUnit1);
-                System.out.println(FightMessagesUtil.buildCreateUnitMessage(nameUnit1,
-                        healthUnit1,
-                        physicalDamageUnit1,
-                        magicDamageUnit1));
+            scannerForCreatingUnits.nextLine(); //костыль
 
-                System.out.println("Введите имя второго персонажа");
-                String nameUnit2 = scannerForCreatingUnits.nextLine();
-                System.out.println("Введите уровень здоровья второго персонажа");
-                int healthUnit2 = scannerForCreatingUnits.nextInt();
-                System.out.println("Введите физическую атаку второго персонажа");
-                int physicalDamageUnit2 = scannerForCreatingUnits.nextInt();
-                System.out.println("Введите магическую атаку второго персонажа");
-                int magicDamageUnit2 = scannerForCreatingUnits.nextInt();
+            System.out.println("Введите имя второго персонажа");
+            String nameUnit2 = scannerForCreatingUnits.nextLine();
+            int healthUnit2 = readInt(scannerForCreatingUnits, "Введите уровень здоровья второго персонажа");
+            int physicalDamageUnit2 = readInt(scannerForCreatingUnits,"Введите физическую атаку второго персонажа");
+            int magicDamageUnit2 = readInt(scannerForCreatingUnits, "Введите магическую атаку второго персонажа");
 
-                Unit unit2 = new Unit(nameUnit2, healthUnit2, physicalDamageUnit2, magicDamageUnit2);
-                System.out.println(FightMessagesUtil.buildCreateUnitMessage(nameUnit2,
-                        healthUnit2,
-                        physicalDamageUnit2,
-                        magicDamageUnit2));
+            Unit unit1 = new Unit(nameUnit1, healthUnit1, physicalDamageUnit1, magicDamageUnit1);
+            System.out.println(FightMessagesUtil.buildCreateUnitMessage(nameUnit1,
+                    healthUnit1,
+                    physicalDamageUnit1,
+                    magicDamageUnit1));
 
-                FightService fightService = new FightService();
-                fightService.fight(unit1, unit2);
-            }
-            if (number == 0) {
-                System.out.println("Завершение программы. Поиграем в другой раз!");
-            }
+            Unit unit2 = new Unit(nameUnit2, healthUnit2, physicalDamageUnit2, magicDamageUnit2);
+            System.out.println(FightMessagesUtil.buildCreateUnitMessage(nameUnit2,
+                    healthUnit2,
+                    physicalDamageUnit2,
+                    magicDamageUnit2));
+
+            FightService fightService = new FightService();
+            fightService.fight(unit1, unit2);
+        }
+        if (number == 0) {
+            System.out.println("Завершение программы. Поиграем в другой раз!");
+        }
 
         if (number < 0 || number > 2)
-        System.out.println("Вы ввели неверное число. Введите 0, 1 или 2");
+            System.out.println("Вы ввели неверное число. Введите 0, 1 или 2");
     }
 }

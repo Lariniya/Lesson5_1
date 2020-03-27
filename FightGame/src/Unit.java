@@ -72,14 +72,13 @@ public class Unit {
 
     public void physicalHit(int physicalDamage){
         this.health -= physicalDamage;
+        if(health < 0)
+            health = 0;
     }
 
     public void magicHit(int magic_damage){
-        this.health -= magicDamage;
+        this.health -= magic_damage;
+        if(health < 0)
+            health = 0;
     }
-
-   // @Override
-   // public String toString() {
-      //  return FightMessagesUtil.buildCreateUnitMessage(name, health, physicalDamage, magicDamage);
-   // }
 }

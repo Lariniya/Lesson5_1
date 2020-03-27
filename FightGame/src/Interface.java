@@ -9,33 +9,25 @@ public class Interface {
     private static final String[] ARRAY_NAMES_RAND =
             {"Крейг", "Макс", "Сара", "Энди", "Тамара", "Зинаида", "Паркинсон"};
 
-
-    public void readConsole() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Добро пожаловать в игру!\n" +
-                "Введите 1, чтобы создать случайный поединок\n" +
-                "Введите 2, чтобы создать собственных персонажей\n" +
-                "Введите 0, чтобы выйти");
-
-        if (sc.hasNextInt()) {
-            int number = sc.nextInt();
-            chooseGameType(number);
-
-        } else {
-            System.out.println("Извините, но это явно не число. Перезапустите программу и попробуйте снова!");
-        }
-        sc.close();
-    }
-
-    public int readInt(Scanner sc, String message){
+    public int readInt(Scanner sc, String message) {
         System.out.println(message);
-        if (sc.hasNextInt()){
+        if (sc.hasNextInt()) {
             return sc.nextInt();
-        }
-        else {
+        } else {
             System.out.println("Ошибка. Не смогли распознать число " + sc.nextLine());
             return readInt(sc, message);
         }
+    }
+
+    public void readConsole() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Добро пожаловать в игру!");
+        int number = readInt(sc,
+                "Введите 1, чтобы создать случайный поединок\n" +
+                        "Введите 2, чтобы создать собственных персонажей\n" +
+                        "Введите 0, чтобы выйти");
+        chooseGameType(number);
+        sc.close();
     }
 
     public void chooseGameType(int number) {
@@ -80,7 +72,7 @@ public class Interface {
             System.out.println("Введите имя второго персонажа");
             String nameUnit2 = scannerForCreatingUnits.nextLine();
             int healthUnit2 = readInt(scannerForCreatingUnits, "Введите уровень здоровья второго персонажа");
-            int physicalDamageUnit2 = readInt(scannerForCreatingUnits,"Введите физическую атаку второго персонажа");
+            int physicalDamageUnit2 = readInt(scannerForCreatingUnits, "Введите физическую атаку второго персонажа");
             int magicDamageUnit2 = readInt(scannerForCreatingUnits, "Введите магическую атаку второго персонажа");
 
             Unit unit1 = new Unit(nameUnit1, healthUnit1, physicalDamageUnit1, magicDamageUnit1);

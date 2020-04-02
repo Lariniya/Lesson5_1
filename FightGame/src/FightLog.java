@@ -8,9 +8,9 @@ public class FightLog {
         list.add(message);
     }
 
-    public void print(){
-        for (String message : list){
-            System.out.println(message);
-        }
+
+
+    public List<String> getMessages(){
+        return list;
     }
 }

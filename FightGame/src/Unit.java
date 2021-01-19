@@ -7,14 +7,14 @@ public class Unit {
 
     private String name;
     private int health;
-    private int physical_damage;
-    private int magic_damage;
+    private int physicalDamage;
+    private int magicDamage;
 
-    public Unit(String name, int health, int physical_damage, int magic_damage) {
+    public Unit(String name, int health, int physicalDamage, int magicDamage) {
         this.setName(name);
         this.setHealth(health);
-        this.setPhysical_Damage(physical_damage);
-        this.setMagic_Damage(magic_damage);
+        this.setPhysicalDamage(physicalDamage);
+        this.setMagicDamage(magicDamage);
     }
 
     public String getName() {
@@ -27,8 +27,7 @@ public class Unit {
             this.name = name;
         } else {
             this.name = NAME_DEFAULT;
-            System.out.println("Ошибка! Имя не может быть пустым! Присвоено значение по-умолчанию "
-                    + NAME_DEFAULT);
+            System.out.println(FightMessagesUtil.buildDefaultNameMessage(this));
         }
     }
 
@@ -41,54 +40,45 @@ public class Unit {
             this.health = health;
         } else {
             this.health = HEALTH_DEFAULT;
-            System.out.println("Ошибка! Здоровье не может быть равно 0! Присвоено значение по-умолчанию "
-                    + HEALTH_DEFAULT);
+            System.out.println(FightMessagesUtil.buildNullHealthMessage(HEALTH_DEFAULT));
         }
     }
 
-    public int getPhysical_Damage() {
-        return physical_damage;
+    public int getPhysicalDamage() {
+        return physicalDamage;
     }
 
-    public void setPhysical_Damage(int physical_damage) {
-        if (physical_damage > 0) {
-            this.physical_damage = physical_damage;
+    public void setPhysicalDamage(int physicalDamage) {
+        if (physicalDamage > 0) {
+            this.physicalDamage = physicalDamage;
         } else {
-            this.physical_damage = PHYSICAL_DAMAGE_DEFAULT;
-            System.out.println("Ошибка! Физическая атака не может быть равна 0! Присвоено значение по-умолчанию "
-                    + PHYSICAL_DAMAGE_DEFAULT);
+            this.physicalDamage = PHYSICAL_DAMAGE_DEFAULT;
+            System.out.println(FightMessagesUtil.buildNullPhysicalAttackMessage(PHYSICAL_DAMAGE_DEFAULT));
         }
     }
 
-    public int getMagic_Damage() {
-        return magic_damage;
+    public int getMagicDamage() {
+        return magicDamage;
     }
 
-    public void setMagic_Damage(int magic_damage) {
-        if (magic_damage > 0) {
-            this.magic_damage = magic_damage;
+    public void setMagicDamage(int magicDamage) {
+        if (magicDamage > 0) {
+            this.magicDamage = magicDamage;
         } else {
-            this.magic_damage = MAGIC_DAMAGE_DEFAULT;
-            System.out.println("Ошибка! Магическая атака не может быть равна 0! Присвоено значение по-умолчанию "
-                    + MAGIC_DAMAGE_DEFAULT);
+            this.magicDamage = MAGIC_DAMAGE_DEFAULT;
+            System.out.println(FightMessagesUtil.buildMNullMagicMessage(MAGIC_DAMAGE_DEFAULT));
         }
     }
 
-    public void physicalHit(int physical_damage){
-        this.health -= physical_damage;
+    public void physicalHit(int physicalDamage){
+        this.health -= physicalDamage;
+        if(health < 0)
+            health = 0;
     }
 
     public void magicHit(int magic_damage){
         this.health -= magic_damage;
-    }
-
-    @Override
-    public String toString() {
-        return "Поздравляем! Вы создали персонажа " +
-                " по имени " + name +
-                ", со здоровьем " + health +
-                ", его физический урон " + physical_damage +
-                ", а его магическая атака " + magic_damage +
-                ". Приятной игры!";
+        if(health < 0)
+            health = 0;
     }
 }

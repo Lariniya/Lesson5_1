@@ -1,6 +1,6 @@
 public class FightLog {
 
-    private static final int ARR_SIZE = 50;
+    private static final int ARR_SIZE = 2000;
     private int lastEventIndex = 0;
     private String[] events = new String[ARR_SIZE];
     private Unit winner;
